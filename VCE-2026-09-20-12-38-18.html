@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#b9f5c8">
+<title>ryzexx str.com — ryzexx str</title>
+<style>
+:root{
+  --green:#9ee7ad;--green2:#dff9e5;--green3:#55c873;--dark:#16351f;
+  --muted:#6b7c70;--white:#fff;--bg:#f6fbf7;--danger:#ef6262;
+  --shadow:0 10px 30px rgba(25,75,39,.09);
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--dark)}
+button,input,textarea,select{font:inherit}button{cursor:pointer;border:0}
+.container{width:min(1180px,calc(100% - 28px));margin:auto}
+header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid #e5f1e8}
+.nav{height:70px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-size:22px;font-weight:900;letter-spacing:-.7px}.brand span{color:#42bd62}
+.nav-actions{display:flex;gap:8px}
+.btn{padding:11px 16px;border-radius:13px;font-weight:800;transition:.18s}
+.btn:hover{transform:translateY(-1px)}.btn-primary{background:var(--green3);color:#fff}.btn-light{background:var(--green2);color:#246536}
+.btn-dark{background:#183a23;color:#fff}.btn-danger{background:#ffe3e3;color:#b72f2f}.btn-white{background:#fff;border:1px solid #dfece2}
+.hero{padding:54px 0 30px}.hero-box{background:linear-gradient(135deg,#fff 0%,#ecfff0 100%);border:1px solid #dcefe1;border-radius:28px;padding:40px;box-shadow:var(--shadow);display:grid;grid-template-columns:1.4fr .8fr;gap:28px;align-items:center}
+.badge{display:inline-flex;padding:7px 11px;border-radius:999px;background:var(--green2);color:#26733b;font-size:12px;font-weight:900}
+h1{font-size:clamp(34px,6vw,62px);line-height:1.02;margin:14px 0 12px;letter-spacing:-2.5px}
+.hero p{color:var(--muted);font-size:16px;line-height:1.7;max-width:650px}.hero-buttons{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.hero-card{background:#fff;border:1px solid #e3eee5;border-radius:24px;padding:24px}
+.stat{display:flex;justify-content:space-between;padding:13px 0;border-bottom:1px solid #edf3ee}.stat:last-child{border:0}
+.section{padding:22px 0 55px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:14px;margin-bottom:18px}.section h2{margin:0;font-size:27px}
+.controls{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:20px}.search{flex:1;min-width:200px}
+input,textarea,select{width:100%;padding:12px 13px;border:1px solid #d9e8dc;border-radius:12px;background:#fff;outline:none;color:var(--dark)}
+input:focus,textarea:focus,select:focus{border-color:#69d481;box-shadow:0 0 0 3px #dff9e5}
+textarea{min-height:90px;resize:vertical}.field{margin-bottom:13px}.field label{display:block;font-size:12px;font-weight:900;margin:0 0 6px;color:#45604c}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.card{background:#fff;border:1px solid #e2eee4;border-radius:20px;overflow:hidden;box-shadow:0 7px 22px rgba(25,75,39,.06);display:flex;flex-direction:column}
+.card-img{height:205px;background:linear-gradient(135deg,#edf9ef,#d9f5df);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.card-img img{width:100%;height:100%;object-fit:cover}.noimg{font-size:38px;color:#77bf87}
+.status{position:absolute;top:12px;left:12px;padding:6px 10px;border-radius:999px;font-size:11px;font-weight:900;background:#fff}
+.status.ok{color:#16813b}.status.sold{color:#b22f2f;background:#ffe5e5}
+.product-click{cursor:pointer}.product-click img{transition:transform .2s}.product-click:hover img{transform:scale(1.025)}
+.public-status{font-size:12px;font-weight:900;margin-top:4px}.public-status.ok{color:#16813b}.public-status.sold{color:#b22f2f}
+.detail-section{margin-top:16px;padding:14px;border:1px solid #e2eee4;border-radius:14px;background:#fbfefb}
+.detail-section h4{margin:0 0 8px;font-size:14px}.detail-text,.detail-specs{font-size:13px;line-height:1.7;color:#506157;white-space:normal}
+.detail-gallery{display:flex;flex-direction:column;gap:2px}
+
+.card-body{padding:16px}.card-title{font-size:18px;font-weight:900;margin:0 0 7px}.price{font-size:20px;font-weight:950;color:#23a54a;margin-bottom:10px}
+.desc{font-size:13px;line-height:1.55;color:#68786d;min-height:40px;white-space:pre-line}
+.specs{margin:10px 0;padding-left:17px;color:#506157;font-size:13px}.card-actions{display:flex;gap:8px;margin-top:13px}.card-actions .btn{flex:1;text-align:center}
+.admin-only{display:none}.admin .admin-only{display:block}.admin .admin-inline{display:flex}
+.empty{text-align:center;padding:45px 15px;background:#fff;border:1px dashed #cfe1d3;border-radius:20px;color:#718078}
+footer{padding:35px 0;background:#fff;border-top:1px solid #e4eee6}.footer-row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;color:#66746a;font-size:13px}
+.modal{position:fixed;inset:0;background:rgba(12,35,18,.45);z-index:100;display:none;align-items:center;justify-content:center;padding:15px}.modal.open{display:flex}
+.modal-box{width:min(720px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:24px;padding:24px;box-shadow:0 25px 70px rgba(0,0,0,.18)}
+.modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}.modal-head h3{margin:0;font-size:22px}
+.close{width:36px;height:36px;border-radius:10px;background:#f0f5f1;font-size:20px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.full{grid-column:1/-1}
+.image-preview{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.preview{width:78px;height:60px;border-radius:9px;object-fit:cover;border:1px solid #dce8df}
+.notice{padding:12px;border-radius:12px;background:#fff8df;color:#765e16;font-size:12px;line-height:1.5;margin-bottom:14px}
+.toast{position:fixed;right:18px;bottom:18px;z-index:200;background:#183a23;color:#fff;padding:13px 16px;border-radius:13px;box-shadow:var(--shadow);display:none;font-weight:700}
+.admin-bar{display:none;background:#183a23;color:#fff}.admin .admin-bar{display:block}.admin-bar-inner{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 0;font-size:13px}
+.link{color:#188f3b;text-decoration:none;font-weight:800}.link:hover{text-decoration:underline}
+.small{font-size:12px;color:var(--muted)}.hidden{display:none!important}
+@media(max-width:850px){.hero-box{grid-template-columns:1fr;padding:27px}}
+@media(max-width:580px){.nav{height:62px}.brand{font-size:18px}.nav-actions .btn{padding:9px 11px;font-size:12px}.hero{padding-top:25px}.form-grid{grid-template-columns:1fr}.full{grid-column:auto}.card-img{height:190px}.card-body{padding:12px}.card-title{font-size:15px}.price{font-size:17px}h1{letter-spacing:-1.5px}.hero-box{border-radius:20px}}
+</style>
+</head>
+<body>
+<div id="app">
+<header>
+  <div class="container nav">
+    <div class="brand">ryzexx <span>str</span>.com</div>
+    <div class="nav-actions">
+      <button class="btn btn-light" onclick="scrollToStore()">🛍️ Store</button>
+      <button class="btn btn-primary" id="loginBtn" onclick="openLogin()">🔐 Admin</button>
+    </div>
+  </div>
+</header>
+
+<div class="admin-bar">
+  <div class="container admin-bar-inner">
+    <span>⚙️ Mode Admin aktif — hanya admin yang dapat mengelola stok.</span>
+    <div style="display:flex;gap:7px">
+      <button class="btn btn-light" style="padding:7px 10px" onclick="openProduct()">＋ Posting</button>
+      <button class="btn btn-white" style="padding:7px 10px" onclick="logout()">Keluar</button>
+    </div>
+  </div>
+</div>
+
+<main>
+<section class="hero">
+ <div class="container">
+  <div class="hero-box">
+   <div>
+    <span class="badge">RYZEXX STR • ACCOUNT STORE</span>
+    <h1>Temukan akun yang kamu cari.</h1>
+    <p>Store akun digital dengan tampilan simpel, informasi jelas, dan pemesanan langsung melalui WhatsApp. Pilih akun, cek detailnya, lalu hubungi admin.</p>
+    <div class="hero-buttons">
+      <button class="btn btn-primary" onclick="scrollToStore()">Lihat Stok →</button>
+      <button class="btn btn-light" onclick="complaint()">📩 Pengaduan</button>
+    </div>
+   </div>
+   <div class="hero-card">
+     <div class="stat"><b>Nama Store</b><span>ryzexx str</span></div>
+     <div class="stat"><b>Kontak</b><a class="link" href="https://wa.me/6285355108535" target="_blank">WhatsApp</a></div>
+     <div class="stat"><b>Status</b><span style="color:#20a54a;font-weight:900">● Online</span></div>
+     <div class="stat"><b>Pesanan</b><span>Langsung ke WhatsApp</span></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="section" id="store">
+ <div class="container">
+  <div class="section-head">
+   <div><h2>Stok Akun</h2><div class="small">Pilih akun yang tersedia untuk melakukan pembelian.</div></div>
+   <button class="btn btn-primary admin-only" onclick="openProduct()">＋ Tambah Stok</button>
+  </div>
+  <div class="controls">
+    <input class="search" id="search" placeholder="🔎 Cari akun, deskripsi, spesifikasi..." oninput="render()">
+    <select id="filter" onchange="render()" style="max-width:170px">
+      <option value="all">Semua status</option><option value="available">Masih Ada</option><option value="sold">Sold</option>
+    </select>
+  </div>
+  <div id="products" class="grid"></div>
+ </div>
+</section>
+</main>
+
+<footer>
+ <div class="container footer-row">
+   <div><b>ryzexx str</b><br>Store akun digital.</div>
+   <div>Butuh bantuan? <a class="link" href="https://wa.me/6285355108535" target="_blank">Chat WhatsApp</a></div>
+ </div>
+</footer>
+</div>
+
+<div class="modal" id="loginModal">
+ <div class="modal-box" style="max-width:420px">
+  <div class="modal-head"><h3>Login Admin</h3><button class="close" onclick="closeModal('loginModal')">×</button></div>
+  <div class="notice">Halaman pembeli tetap bisa digunakan tanpa login. Login hanya diperlukan untuk posting, edit, hapus, dan mengubah status stok.</div>
+  <form onsubmit="login(event)">
+   <div class="field"><label>Password Admin</label><input id="password" type="password" placeholder="Masukkan password" autocomplete="current-password" required></div>
+   <button class="btn btn-primary" style="width:100%">Masuk</button>
+  </form>
+ </div>
+</div>
+
+<div class="modal" id="productModal">
+ <div class="modal-box">
+  <div class="modal-head"><h3 id="formTitle">Tambah Stok</h3><button class="close" onclick="closeModal('productModal')">×</button></div>
+  <form id="productForm" onsubmit="saveProduct(event)">
+   <input type="hidden" id="productId">
+   <div class="form-grid">
+    <div class="field"><label>Judul Akun *</label><input id="title" required placeholder="Contoh: Akun FF Sultan"></div>
+    <div class="field"><label>Harga *</label><input id="price" required placeholder="Contoh: Rp150.000"></div>
+    <div class="field"><label>Status</label><select id="status"><option value="available">Masih Ada</option><option value="sold">Sold</option></select></div>
+    <div class="field"><label>Spesifikasi</label><input id="specs" placeholder="Level 60 • Skin lengkap • dll"></div>
+    <div class="field full"><label>Deskripsi</label><textarea id="description" placeholder="Jelaskan isi/kondisi akun..."></textarea></div>
+    <div class="field full"><label>Gambar Produk (bisa lebih dari satu)</label><input id="images" type="file" accept="image/*" multiple onchange="previewImages(event)"><div id="imagePreview" class="image-preview"></div></div>
+   </div>
+   <div class="small" style="margin:4px 0 14px">Data stok disimpan di browser menggunakan localStorage, sehingga tidak hilang saat halaman di-refresh pada perangkat/browser yang sama.</div>
+   <button class="btn btn-primary" style="width:100%">💾 Simpan Stok</button>
+  </form>
+ </div>
+</div>
+
+<div class="modal" id="detailModal">
+ <div class="modal-box">
+  <div class="modal-head"><h3 id="detailTitle">Detail Akun</h3><button class="close" onclick="closeModal('detailModal')">×</button></div>
+  <div id="detailContent"></div>
+ </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const ADMIN_PASSWORD = "raffakului@22";
+const WA_NUMBER = "6285355108535";
+const STORAGE_KEY = "ryzexx_str_products_v1";
+let isAdmin = sessionStorage.getItem("ryzexx_admin") === "1";
+let editingImages = [];
+
+const $ = id => document.getElementById(id);
+function esc(v=""){return String(v).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));}
+function getProducts(){
+  try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]")}catch(e){return []}
+}
+function setProducts(p){localStorage.setItem(STORAGE_KEY,JSON.stringify(p))}
+function formatPrice(v){return v||"Harga belum diatur"}
+function waLink(p){
+  const text = "Saya tertarik pada " + (p.title||"akun ini") + (p.price ? " - "+p.price : "");
+  return "https://wa.me/"+WA_NUMBER+"?text="+encodeURIComponent(text);
+}
+function complaint(){
+  const text="Halo admin ryzexx str, saya ingin melakukan pengaduan.";
+  window.open("https://wa.me/"+WA_NUMBER+"?text="+encodeURIComponent(text),"_blank");
+}
+function scrollToStore(){ $("store").scrollIntoView({behavior:"smooth"}) }
+function showToast(msg){const t=$("toast");t.textContent=msg;t.style.display="block";clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.style.display="none",2600)}
+function openModal(id){$(id).classList.add("open")}
+function closeModal(id){$(id).classList.remove("open")}
+function openLogin(){ if(isAdmin){showToast("Kamu sudah login sebagai admin.");return} $("password").value="";openModal("loginModal");setTimeout(()=>$("password").focus(),100)}
+function login(e){
+ e.preventDefault();
+ if($("password").value===ADMIN_PASSWORD){
+   isAdmin=true;sessionStorage.setItem("ryzexx_admin","1");document.body.classList.add("admin");closeModal("loginModal");render();showToast("Login admin berhasil.");
+ }else showToast("Password admin salah.");
+}
+function logout(){isAdmin=false;sessionStorage.removeItem("ryzexx_admin");document.body.classList.remove("admin");render();showToast("Berhasil keluar dari mode admin.")}
+function previewImages(e){
+ const files=[...e.target.files];
+ const readers=files.map(file=>new Promise(resolve=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.readAsDataURL(file)}));
+ Promise.all(readers).then(imgs=>{editingImages=editingImages.concat(imgs);renderPreview()});
+}
+function renderPreview(){
+ $("imagePreview").innerHTML=editingImages.map((src,i)=>`<div style="position:relative"><img class="preview" src="${src}"><button type="button" onclick="removeImage(${i})" style="position:absolute;right:-5px;top:-5px;width:20px;height:20px;border-radius:50%;background:#fff;color:#b22f2f;border:1px solid #ddd">×</button></div>`).join("");
+}
+function removeImage(i){editingImages.splice(i,1);renderPreview()}
+function openProduct(id=null){
+ if(!isAdmin){openLogin();return}
+ $("productForm").reset();editingImages=[];renderPreview();$("productId").value="";
+ $("formTitle").textContent=id?"Edit Stok":"Tambah Stok";
+ if(id){
+   const p=getProducts().find(x=>x.id===id);if(!p)return;
+   $("productId").value=p.id;$("title").value=p.title||"";$("price").value=p.price||"";
+   $("status").value=p.status||"available";$("specs").value=p.specs||"";$("description").value=p.description||"";
+   editingImages=[...(p.images||[])];renderPreview();
+ }
+ openModal("productModal");
+}
+function saveProduct(e){
+ e.preventDefault();
+ if(!isAdmin)return;
+ const products=getProducts(), id=$("productId").value || ("p_"+Date.now()+"_"+Math.random().toString(36).slice(2,7));
+ const old=products.find(x=>x.id===id);
+ const p={id,title:$("title").value.trim(),price:$("price").value.trim(),
+   status:$("status").value,specs:$("specs").value.trim(),description:$("description").value.trim(),
+   images:editingImages,createdAt:old?.createdAt||Date.now(),updatedAt:Date.now()};
+ const idx=products.findIndex(x=>x.id===id);if(idx>=0)products[idx]=p;else products.unshift(p);
+ try{setProducts(products)}catch(err){showToast("Gambar terlalu besar. Coba gambar lebih kecil.");return}
+ closeModal("productModal");render();showToast(old?"Stok berhasil diperbarui.":"Stok berhasil diposting.");
+}
+function deleteProduct(id){
+ if(!isAdmin)return;
+ const p=getProducts().find(x=>x.id===id);if(!p)return;
+ if(confirm("Hapus stok '"+p.title+"'?")){setProducts(getProducts().filter(x=>x.id!==id));render();showToast("Stok dihapus.")}
+}
+function toggleStatus(id){
+ if(!isAdmin)return;
+ const ps=getProducts(),i=ps.findIndex(x=>x.id===id);if(i<0)return;
+ ps[i].status=ps[i].status==="sold"?"available":"sold";ps[i].updatedAt=Date.now();setProducts(ps);render();
+ showToast(ps[i].status==="sold"?"Ditandai SOLD.":"Ditandai masih tersedia.");
+}
+function productUrl(id){
+  const u=new URL(window.location.href);
+  u.search="";
+  u.hash="produk-"+encodeURIComponent(id);
+  return u.href;
+}
+async function copyProductLink(id){
+  const url=productUrl(id);
+  try{
+    await navigator.clipboard.writeText(url);
+    showToast("Link produk berhasil disalin.");
+  }catch(e){
+    const ta=document.createElement("textarea");
+    ta.value=url;document.body.appendChild(ta);ta.select();
+    document.execCommand("copy");ta.remove();
+    showToast("Link produk berhasil disalin.");
+  }
+}
+function openDetail(id){
+ const p=getProducts().find(x=>x.id===id);if(!p)return;
+ $("detailTitle").textContent=p.title;
+ const imgs=(p.images||[]).map(x=>`<img src="${x}" style="width:100%;height:230px;object-fit:cover;border-radius:15px;margin-bottom:9px">`).join("");
+ $("detailContent").innerHTML=`
+   ${imgs||'<div class="card-img" style="border-radius:15px;margin-bottom:12px"><span class="noimg">🖼️</span></div>'}
+   <div class="badge">${p.status==="sold"?"SOLD":"MASIH ADA"}</div>
+   <h2 style="margin:10px 0 5px">${esc(p.title)}</h2>
+   <div class="price">${esc(formatPrice(p.price))}</div>
+   ${p.description?`<p class="desc" style="min-height:0">${esc(p.description)}</p>`:""}
+   ${p.specs?`<p><b>Spesifikasi:</b><br>${esc(p.specs)}</p>`:""}
+   <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">
+     ${p.status!=="sold"?`<a class="btn btn-primary" style="flex:1;text-align:center;text-decoration:none;min-width:180px" href="${waLink(p)}" target="_blank">💬 Beli via WhatsApp</a>`:`<button class="btn btn-danger" style="flex:1;min-width:180px" disabled>Sudah Terjual</button>`}
+     <button class="btn btn-light" style="flex:1;min-width:150px" onclick="copyProductLink('${p.id}')">🔗 Salin Link Produk</button>
+   </div>`;
+ openModal("detailModal");
+}
+function render(){
+ const q=($("search")?.value||"").toLowerCase().trim(), f=$("filter")?.value||"all";
+ const products=getProducts().filter(p=>{
+   const hay=[p.title,p.price,p.description,p.specs].join(" ").toLowerCase();
+   return (!q||hay.includes(q))&&(f==="all"||p.status===f);
+ });
+ const el=$("products");
+ if(!products.length){el.className="";el.innerHTML=`<div class="empty"><div style="font-size:38px">📦</div><b>Belum ada stok</b><p>${isAdmin?"Klik “Tambah Stok” untuk memposting akun pertama.":"Stok akan tampil di sini ketika admin sudah memposting."}</p></div>`;return}
+ el.className="grid";
+ el.innerHTML=products.map(p=>{
+  const img=p.images?.[0];
+  return `<article class="card">
+    <div class="card-img">${img?`<img src="${img}" alt="${esc(p.title)}">`:`<span class="noimg">🖼️</span>`}
+      <span class="status ${p.status==="sold"?"sold":"ok"}">${p.status==="sold"?"SOLD":"✓ MASIH ADA"}</span>
+    </div>
+    <div class="card-body">
+      <h3 class="card-title">${esc(p.title)}</h3><div class="price">${esc(formatPrice(p.price))}</div>
+      <div class="desc">${esc(p.description||"Tidak ada deskripsi.")}</div>
+      ${p.specs?`<div class="specs">⚙️ ${esc(p.specs)}</div>`:""}
+      <div class="card-actions">
+       <button class="btn btn-light" onclick="openDetail('${p.id}')">Detail</button>
+       ${p.status!=="sold"?`<a class="btn btn-primary" href="${waLink(p)}" target="_blank" rel="noopener">Beli</a>`:`<button class="btn btn-danger" disabled>Sold</button>`}
+      </div>
+      <button class="btn btn-white" style="width:100%;margin-top:8px" onclick="copyProductLink('${p.id}')">🔗 Salin Link Produk</button>
+      ${isAdmin?`<div class="admin-inline" style="display:flex;gap:6px;margin-top:12px">
+        <button class="btn btn-white" style="padding:8px;flex:1" onclick="openProduct('${p.id}')">Edit</button>
+        <button class="btn btn-light" style="padding:8px;flex:1" onclick="toggleStatus('${p.id}')">${p.status==="sold"?"Aktifkan":"Tandai Sold"}</button>
+        <button class="btn btn-danger" style="padding:8px" onclick="deleteProduct('${p.id}')">Hapus</button>
+      </div>`:""}
+    </div>
+  </article>`
+ }).join("");
+}
+document.addEventListener("click",e=>{
+ if(e.target.classList.contains("modal"))e.target.classList.remove("open");
+});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")document.querySelectorAll(".modal.open").forEach(x=>x.classList.remove("open"))});
+if(isAdmin)document.body.classList.add("admin");
+render();
+
+function openProductFromUrl(){
+  const hash=decodeURIComponent(window.location.hash||"");
+  if(hash.startsWith("#produk-")){
+    const id=hash.slice(8);
+    if(getProducts().some(p=>p.id===id)){
+      setTimeout(()=>openDetail(id),120);
+    }
+  }
+}
+openProductFromUrl();
+window.addEventListener("hashchange",openProductFromUrl);
+</script>
+</body>
+</html>
